@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <script src="scripts/util.js"></script>
+    <script src="scripts/data.js"></script>
+    <script src="scripts/vis-stacked-bars.js" type="module"></script>
+    <script src="scripts/vis-pie.js" type="module"></script>
+    <style>
+        html {
+            background: hsl(0, 0%, 96%);
+        }
+
+        svg {
+            display: block;
+        }
+
+        text {
+            font-family: -apple-system, sans-serif;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<button id="vis-stacked-bars-by-month">By Month</button>
+<button id="vis-stacked-bars-by-week">By Week</button>
+
+<svg id="stacked-bar-chart"></svg>
+<svg id="pie-chart"></svg>
+
+</body>
+</html>
