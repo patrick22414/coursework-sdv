@@ -87,7 +87,7 @@ function drawCircles(byMonth = true) {
         .attr("fill", d => colorScale(d.clade))
         .attr("stroke", d => colorScale(d.clade).darker())
         .transition().duration(1000)
-        .attr("r", d => Math.sqrt(d.count) * 1.5 + 2)
+        .attr("r", d => Math.sqrt(d.count) * 1.75 + 2)
 
     svg.selectAll("circle")
         .on("mouseover", function (e, {date, clade, count}) {

@@ -100,7 +100,62 @@ function drawBars(byMonth = true) {
         })
         .on("mouseout", function () {
             svgCircleChart.selectAll("circle")
-                .attr("stroke-width", "unset")
+                .attr("stroke-width", null)
+        })
+
+    // Legend
+    const legend = svg.append("g").classed("legend", true)
+        .attr("transform", `translate(${margin.left + 20}, ${margin.top + 10})`)
+
+    legend.append("rect")
+        .attr("width", 218)
+        .attr("height", 135 + 16 + 15)
+        .attr("fill", "whitesmoke")
+        .attr("stroke", "darkgray")
+
+    legend.selectAll("g.legend-item")
+        .data(allClades)
+        .enter()
+        .append("g").classed("legend-item", true)
+        .attr("transform", (_, i) => `translate(${(Math.floor(i / 6) * 100 + 15 )}, ${(i % 6) * 24 + 15})`)
+        .each(function (clade) {
+            const legendItem = d3.select(this)
+
+            legendItem.append("rect")
+                .attr("width", 16)
+                .attr("height", 16)
+                .attr("rx", 2)
+                .attr("fill", colorScale(clade))
+                .attr("stroke", colorScale(clade).darker())
+
+            legendItem.append("text")
+                .attr("x", 20)
+                .attr("y", 12)
+                .text(clade)
+        })
+        .on("mouseover", function (e, clade) {
+            d3.select(this)
+                .select("rect")
+                .attr("stroke-width", 4)
+
+            svg.selectAll("rect.bar-block")
+                .filter(d => d.clade === clade)
+                .attr("stroke-width", 4)
+
+            svgCircleChart.selectAll("circle")
+                .filter(d => d.clade === clade)
+                .attr("stroke-width", 4)
+        })
+        .on("mouseout", function () {
+            d3.select(this)
+                .select("rect")
+                .attr("stroke-width", null)
+
+            svg.selectAll("rect.bar-block")
+                .attr("stroke-width", null)
+
+            svgCircleChart.selectAll("circle")
+                .attr("stroke-width", null)
         })
 }
 

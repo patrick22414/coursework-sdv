@@ -50,6 +50,11 @@
     <p><em><strong>Welcome</strong></em> to my visualisation on COVID-19 Mutations Data Analysis.</p>
 
     <p>
+        This visualisation is about the spread of different SARS-CoV-2 variants in the United Kingdom, between Jan 2020
+        and Feb 2021.
+    </p>
+
+    <p>
         You can view the data
         <button id="by-month">by Month</button>
         , or
@@ -57,21 +62,22 @@
     </p>
 
     <p>
-        The two charts are linked by the same data. <em>Hover your mouse</em> over the bars or
-        circles, and the other chart will respond as well.
+        The two charts are linked by the same data. <strong>Hover your mouse</strong> over the bars or
+        circles, and the other chart will also respond. The legend works in a similar way as well.
     </p>
 
     <p>
-        Your last selection is -
+        This paragraph shows the last selected bar/circle:
+        <br>
         Date: <strong id="date">______</strong>
         Clade: <strong id="clade">______</strong>
         Count: <strong id="count">______</strong>
     </p>
 
-    <div class="charts">
-        <svg id="bar-chart"></svg>
-        <svg id="circle-chart"></svg>
-    </div>
+    <p>Data source: <a href="https://nextstrain.org/groups/neherlab/ncov/united-kingdom">Nextstrain</a></p>
+
+    <svg id="bar-chart"></svg>
+    <svg id="circle-chart"></svg>
 
     <p>* Y axis in the stacked bar chart is slightly inaccurate due to padding</p>
 </div>
