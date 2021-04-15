@@ -2,15 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>SDV Coursework - Songyi Yang</title>
     <script src="https://d3js.org/d3.v6.js"></script>
     <script src="scripts/util.js"></script>
     <script src="scripts/data.js"></script>
-    <script src="scripts/vis-stacked-bars.js" type="module"></script>
-    <script src="scripts/vis-pie.js" type="module"></script>
+    <script src="scripts/vis-bars.js" type="module"></script>
+    <script src="scripts/vis-circles.js" type="module"></script>
     <style>
-        html {
-            background: hsl(0, 0%, 96%);
+        .main {
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+        }
+
+        p {
+            font-family: -apple-system, sans-serif;
+            width: 60ch;
+        }
+
+        button {
+            display: inline-block;
+            font-family: -apple-system, sans-serif;
+            font-size: 1rem;
         }
 
         svg {
@@ -21,15 +34,47 @@
             font-family: -apple-system, sans-serif;
             font-size: 12px;
         }
+
+        rect, circle {
+            stroke-linejoin: round;
+        }
+
+        rect.bar-block:hover, circle:hover {
+            stroke-width: 4;
+        }
     </style>
 </head>
 <body>
 
-<button id="vis-stacked-bars-by-month">By Month</button>
-<button id="vis-stacked-bars-by-week">By Week</button>
+<div class="main">
+    <p><em><strong>Welcome</strong></em> to my visualisation on COVID-19 Mutations Data Analysis.</p>
 
-<svg id="stacked-bar-chart"></svg>
-<svg id="pie-chart"></svg>
+    <p>
+        You can view the data
+        <button id="by-month">by Month</button>
+        , or
+        <button id="by-week">by Week</button>
+    </p>
+
+    <p>
+        The two charts are linked by the same data. <em>Hover your mouse</em> over the bars or
+        circles, and the other chart will respond as well.
+    </p>
+
+    <p>
+        Your last selection is -
+        Date: <strong id="date">______</strong>
+        Clade: <strong id="clade">______</strong>
+        Count: <strong id="count">______</strong>
+    </p>
+
+    <div class="charts">
+        <svg id="bar-chart"></svg>
+        <svg id="circle-chart"></svg>
+    </div>
+
+    <p>* Y axis in the stacked bar chart is slightly inaccurate due to padding</p>
+</div>
 
 </body>
 </html>

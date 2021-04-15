@@ -14,7 +14,6 @@ dataPromise = dataPromise.then(data => {
     }))
         .sort((a, b) => a.date - b.date)
 
-
     allClades = Array.from(new Set(rawData.map(d => d.clade)))
 
     dateRange = d3.extent(rawData, d => d.date)
@@ -29,11 +28,13 @@ let weeklyData
 
 dataPromise = dataPromise.then(() => {
     monthlyData = rawData.map(d => ({
-        ...d, date: d.date.toYearMonthString(),
+        ...d,
+        date: d.date.toYearMonthString(),
     }))
 
     weeklyData = rawData.map(d => ({
-        ...d, date: d.date.toYearWeekString(),
+        ...d,
+        date: d.date.toYearWeekString(),
     }))
 })
 
@@ -44,6 +45,8 @@ dataPromise = dataPromise.then(() => {
     const groupFn = data => d3.rollups(data, v => v.length, d => d.date, d => d.clade)
         .map(d => {
             const arr = Array(d[1].length)
+
+            d[1] = d3.sort(d[1], dd => allClades.indexOf(dd[0]))
 
             let baseline = 0
             for (const [i, dd] of d[1].entries()) {
@@ -57,7 +60,7 @@ dataPromise = dataPromise.then(() => {
                 baseline += dd[1]
             }
 
-            return d3.sort(arr, d => d.date, d => d.clade)
+            return arr
         })
 
     stackedMonthlyData = groupFn(monthlyData)
