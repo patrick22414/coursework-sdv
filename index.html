@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SDV Coursework - Songyi Yang</title>
+    <title>SDV CW - Songyi Yang</title>
     <script src="https://d3js.org/d3.v6.js"></script>
     <script src="scripts/util.js"></script>
     <script src="scripts/data.js"></script>
@@ -63,7 +63,7 @@
 
     <p>
         The two charts are linked by the same data. <strong>Hover your mouse</strong> over the bars or
-        circles, and the other chart will also respond. The legend works in a similar way as well.
+        circles, and the other chart will also respond. <strong>The legend</strong> works in a similar way as well.
     </p>
 
     <p>
@@ -79,7 +79,39 @@
     <svg id="bar-chart"></svg>
     <svg id="circle-chart"></svg>
 
-    <p>* Y axis in the stacked bar chart is slightly inaccurate due to padding</p>
+    <p><strong>How the data is processed:</strong> (This part is also included in the PDF.)</p>
+
+    <p>
+        All data processing is done in JavaScript. The original data from Nextstrain is a <code>.tsv</code>
+        (tab-separated values) file. Each row of the file is a separate genome sample record containing many attributes.
+        Only two of the attributes are of concern here: the date when the sample is collected, and the clade that the
+        identified virus belong to. The file is read using <code>d3.tsv()</code>, resulting in a JavaScript <code>Promise</code>
+        object. The actual data is a list (JS <code>Array</code>) of objects containing two attributes:
+        <code>date</code> and
+        <code>clade</code>, and can be accessed in the <code>.then()</code> function of the <code>Promise</code>. The
+        <code>date</code> attribute is also transformed into a string representing either a month (yyyy-mm) or a week
+        (yyyy-Www).
+    </p>
+    <p>
+        The data is then grouped first by month/week, and second by clade, using <code>d3.group()</code>. And we count
+        the number of samples in each group. This step also sorts the date in ascending order, and the clades in
+        the order of appearance.
+    </p>
+    <p>
+
+        To draw the stacked bars, monthly/weekly data is then aggregated within each date group to compute a
+        "baseline" for each bar. This step is similar to
+        <a href="https://github.com/d3/d3/blob/master/API.md#stacks"><code>d3.stack</code></a> but is written in vanilla
+        JavaScript. The baselines will serve as the Y positions of the stacked bars. Padding is added to the bars for
+        clarity.
+    </p>
+    <p>
+
+        To draw the bubble chart, the X and Y positions of the date and the clade of each group respectively. The radius
+        of the circle is computed using <code>Math.sqrt()</code>. The radius is also adjusted with a minimum value of 2
+        to
+        avoid circles that appear too small.
+    </p>
 </div>
 
 </body>

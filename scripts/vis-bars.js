@@ -61,7 +61,7 @@ function drawBars(byMonth = true) {
         .attr("x1", d => xScale(d) + xScale.bandwidth() / 2)
         .attr("x2", d => xScale(d) + xScale.bandwidth() / 2)
         .attr("y1", margin.top)
-        .attr("y2", height - margin.bottom)
+        .attr("y2", height)
         .attr("stroke", "lightgray")
 
     // Y axis

@@ -45,7 +45,7 @@ function drawCircles(byMonth = true) {
         .append("line")
         .attr("x1", d => xScale(d))
         .attr("x2", d => xScale(d))
-        .attr("y1", margin.top)
+        .attr("y1", 0)
         .attr("y2", height - margin.bottom)
         .attr("stroke", "lightgray")
 
